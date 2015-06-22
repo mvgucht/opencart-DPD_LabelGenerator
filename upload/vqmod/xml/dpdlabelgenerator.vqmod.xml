@@ -1,0 +1,51 @@
+<!--
+/**
+ * DPD Label Generator v0.0.1 shipping module for OpenCart 1.5
+ *
+ * @category   DPDLabelGenerator
+ * @package    DPDLabelGenerator
+ * @author     Michiel Van Gucht (michiel.vangucht@dpd.be)
+ * @copyright  Michiel Van Gucht
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+
+<modification>
+	<id>DPD Label Generator</id>
+	<version>1.5.x</version>
+	<vqmver>2.5.1</vqmver>
+	<author>Michiel Van Gucht</author>
+	<file name="/admin/controller/sale/order.php">
+		<operation error="abort">
+			<search position="after"><![CDATA[$this->data['invoice'] = $this->url->link('sale/order/invoice', 'token=' . $this->session->data['token'], 'SSL');]]></search>
+			<add><![CDATA[$this->data['label'] = $this->url->link('shipping/dpd_labelgenerator/label', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+		<operation error="abort">
+			<search position="after"><![CDATA[$this->data['invoice'] = $this->url->link('sale/order/invoice', 'token=' . $this->session->data['token'] . '&order_id=' . (int)$this->request->get['order_id'], 'SSL');]]></search>
+			<add><![CDATA[$this->data['label'] = $this->url->link('shipping/dpd_labelgenerator/label', 'token=' . $this->session->data['token'] . '&order_id=' . (int)$this->request->get['order_id'], 'SSL');]]></add>
+		</operation>
+	</file>
+	<file name="/admin/view/template/sale/order_list.tpl">
+		<operation error="abort">
+			<search position="replace" offset="1"><![CDATA[<h1><img src="view/image/order.png" alt="" /> <?php echo $heading_title; ?></h1>]]></search>
+			<add><![CDATA[<h1><img src="view/image/order.png" alt="" /> <?php echo $heading_title; ?></h1>
+				<div class="buttons">
+					<a onclick="$('#form').attr('action', '<?php echo $invoice; ?>'); $('#form').attr('target', '_blank'); $('#form').submit();" class="button"><?php echo $button_invoice; ?></a>
+					<a onclick="$('#form').attr('action', '<?php echo $label; ?>'); $('#form').attr('target', '_blank'); $('#form').submit();" class="button">Generate Label</a>
+					<a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a>
+					<a onclick="$('#form').attr('action', '<?php echo $delete; ?>'); $('#form').attr('target', '_self'); $('#form').submit();" class="button"><?php echo $button_delete; ?></a>
+				</div>]]></add>
+		</operation>
+	</file>
+	<file name="/admin/view/template/sale/order_info.tpl">
+		<operation error="abort">
+			<search position="replace" offset="1"><![CDATA[<h1><img src="view/image/order.png" alt="" /> <?php echo $heading_title; ?></h1>]]></search>
+			<add><![CDATA[<h1><img src="view/image/order.png" alt="" /> <?php echo $heading_title; ?></h1>
+				<div class="buttons">
+					<a href="<?php echo $label; ?>" target="_blank" class="button">Generate Label</a>
+					<a href="<?php echo $invoice; ?>" target="_blank" class="button"><?php echo $button_invoice; ?></a>
+					<a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a>
+				</div>]]></add>
+		</operation>
+	</file>
+</modification>
