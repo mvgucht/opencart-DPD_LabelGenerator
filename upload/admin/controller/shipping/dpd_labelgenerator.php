@@ -29,7 +29,7 @@ class ControllerShippingDpdLabelGenerator extends Controller {
 		}
 
 		// Output
-		$this->data['heading_title'] = $this->language->get('DPD Label Generator');
+		$this->data['heading_title'] = $this->language->get(heading_title');
 
 		$this->data['entry_status'] = $this->language->get('Status:');
 		$this->data['text_enabled'] = $this->language->get('text_enabled');
