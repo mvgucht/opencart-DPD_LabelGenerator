@@ -364,6 +364,8 @@ class ControllerShippingDpdLabelGenerator extends Controller {
 		}
 		if(count($temp_files) > 0) {
 			$pdf_output->merge('browser', 'DPD_' . date("dmYHis") . '.pdf');
+			ob_end_flush();
+			die;
 		}
 		
 		foreach($temp_files as $file) {
