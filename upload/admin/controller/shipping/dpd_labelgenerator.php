@@ -6,7 +6,7 @@ class ControllerShippingDpdLabelGenerator extends Controller {
 	public function index() {
 		$this->language->load('shipping/dpd_labelgenerator');
 		
-		$this->document->setTitle($this->language->get('DPD Label Generator'));
+		$this->document->setTitle($this->language->get('heading_title'));
 		
 		/*
 		if (!$this->user->hasPermission('modify', 'shipping/dpd_carrier')) {
