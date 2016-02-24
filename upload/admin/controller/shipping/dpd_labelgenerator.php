@@ -29,7 +29,7 @@ class ControllerShippingDpdLabelGenerator extends Controller {
 		}
 
 		// Output
-		$this->data['heading_title'] = $this->language->get(heading_title');
+		$this->data['heading_title'] = $this->language->get('heading_title');
 
 		$this->data['entry_status'] = $this->language->get('Status:');
 		$this->data['text_enabled'] = $this->language->get('text_enabled');
@@ -246,7 +246,7 @@ class ControllerShippingDpdLabelGenerator extends Controller {
 		$this->delisID = $this->config->get('dpd_carrier_delis_id');
 		$this->delisPw = $this->config->get('dpd_carrier_delis_password');
 		
-		$this->url = $this->config->get('dpd_carrier_delis_server') == 1 ? 'https://public-ws.dpd.com/services/' : 'https://public-ws-stage.dpd.com/services/';
+		$this->url = $this->config->get('dpd_carrier_delis_server') == 1 ? 'https://public-dis.dpd.nl/Services/' : 'https://public-dis-stage.dpd.nl/Services/';
 		
 		$this->timeLogging = $this->config->get('dpd_carrier_time_logging') == 1;
 		
@@ -363,6 +363,7 @@ class ControllerShippingDpdLabelGenerator extends Controller {
 			}
 		}
 		if(count($temp_files) > 0) {
+      ob_end_clean();
 			$pdf_output->merge('browser', 'DPD_' . date("dmYHis") . '.pdf');
 			ob_end_flush();
 			die;
